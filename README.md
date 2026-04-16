@@ -117,20 +117,7 @@ The application uses a single database named **`expenditure`** with four tables.
 
 ### Entity-Relationship Overview
 
-```
-users ─────────────────────────────────────────────────────┐
-  │                                                         │
-  │ (UserId FK, CASCADE DELETE)                             │
-  ▼                                                         │
-tblcategory  ◄──────────────────┐                          │
-  │                             │                          │
-  │ CategoryId is stored        │ UserId scopes all        │
-  │ denormalized in expense /   │ records per user         │
-  │ income rows (no FK)         │                          │
-  ▼                             │                          │
-tblexpense ──────────────────────┘◄────────────────────────┤
-tblincome  ──────────────────────────────────────────────────┘
-```
+![ER DIAGRAM](./images/ER.png)
 
 ---
 
