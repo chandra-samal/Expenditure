@@ -48,7 +48,7 @@ A full-featured, self-hosted personal finance web application built with PHP and
 ## Project Structure
 
 ```
-improved-expensetracker/
+Expenditure/
 ├── index.php                   # Public landing page
 ├── expenditure.sql             # Full database schema + seed data
 ├── .env                        # Local environment variables (not committed)
@@ -202,11 +202,11 @@ Individual income transactions.
 
 ```bash
 # If cloning from a repository
-git clone <your-repo-url> improved-expensetracker
-cd improved-expensetracker
+git clone https://github.com/chandra-samal/Expenditure.git
+cd Expenditure
 
 # Or simply extract the zip and move it to your web root
-cp -r improved-expensetracker/ /var/www/html/
+cp -r Expenditure/ /var/www/html/
 ```
 
 ---
@@ -261,7 +261,7 @@ SESSION_SECRET=your_long_random_secret_here
 **Apache** — Place the project folder inside your document root (e.g. `/var/www/html/`) and ensure `AllowOverride All` is set so `.htaccess` rules work.
 
 ```apache
-<Directory /var/www/html/improved-expensetracker>
+<Directory /var/www/html/Expenditure>
     AllowOverride All
 </Directory>
 ```
@@ -272,7 +272,7 @@ SESSION_SECRET=your_long_random_secret_here
 server {
     listen 80;
     server_name yourdomain.com;
-    root /var/www/html/improved-expensetracker;
+    root /var/www/html/Expenditure;
     index index.php;
 
     location / {
@@ -292,8 +292,8 @@ server {
 ### Step 5 — Set file permissions
 
 ```bash
-chmod -R 755 /var/www/html/improved-expensetracker
-chown -R www-data:www-data /var/www/html/improved-expensetracker
+chmod -R 755 /var/www/html/Expenditure
+chown -R www-data:www-data /var/www/html/Expenditure
 ```
 
 ---
@@ -303,7 +303,7 @@ chown -R www-data:www-data /var/www/html/improved-expensetracker
 Navigate to:
 
 ```
-http://localhost/improved-expensetracker/
+http://localhost/Expenditure/
 ```
 
 You should see the landing page. Click **Sign In** to log in or **Sign Up** to create a new account.
