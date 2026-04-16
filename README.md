@@ -196,119 +196,52 @@ Individual income transactions.
 - A web server: **Apache** (with `mod_rewrite`) or **Nginx**
 - (Optional) phpMyAdmin for database management
 
----
+Here are the step-by-step instructions for installing and setting up the Expenditure project, including the XAMPP setup:
 
-### Step 1 — Clone or extract the project
+### 1. Clone the Repository
+* Open your terminal or command prompt.
+* Navigate to the directory where you want to store the project.
+* Run the following command to clone the repository:
+    ```bash
+    git clone https://github.com/chandra-samal/Expenditure.git
+    ```
 
-```bash
-# If cloning from a repository
-git clone https://github.com/chandra-samal/Expenditure.git
-cd Expenditure
+### 2. Set Up XAMPP
+* **Download & Install:** If you haven't already, download and install [XAMPP](https://www.apachefriends.org/index.html) for your operating system.
+* **Start Services:** Open the XAMPP Control Panel and start the **Apache** and **MySQL** modules.
 
-# Or simply extract the zip and move it to your web root
-cp -r Expenditure/ /var/www/html/
-```
+### 3. Copy to `htdocs`
+* Locate your XAMPP installation directory (usually `C:\xampp` on Windows or `/Applications/XAMPP` on macOS).
+* Inside the XAMPP directory, find the `htdocs` folder.
+* Copy the entire cloned `Expenditure` project folder and paste it into the `htdocs` directory.
+    * *Path example (Windows):* `C:\xampp\htdocs\Expenditure`
 
----
+### 4. Database Setup (`expenditure.sql`)
+* Open your web browser and go to `http://localhost/phpmyadmin/`.
+* Click on **"New"** in the left sidebar to create a new database.
+* Name the database **`expenditure`** [cite: 526] and click **"Create"**.
+* Select the newly created `expenditure` database from the left sidebar.
+* Click on the **"Import"** tab at the top.
+* Click **"Choose File"** and select the `expenditure.sql` file [cite: 733] located inside your project folder (`htdocs/Expenditure/expenditure.sql`).
+* Scroll down and click the **"Import"** (or "Go") button to execute the SQL script.
 
-### Step 2 — Create the database
+### 5. Environment Configuration
+* Navigate to your project folder inside `htdocs` (`htdocs/Expenditure`).
+* Find the `.env.example` file and rename it to `.env` [cite: 694] (or create a new `.env` file if it doesn't exist).
+* Open the `.env` file and configure your database and JWT settings[cite: 726, 727, 728, 729, 730]:
+    ```env
+    DB_HOST=127.0.0.1
+    DB_USER=root
+    DB_PASSWORD=
+    DB_NAME=expenditure
+    JWT_SECRET=your_secret_key_here
+    ```
+    *(Note: The default MySQL user in XAMPP is usually `root` with no password.)*
 
-Log into MySQL and import the provided schema:
-
-```bash
-mysql -u root -p < expenditure.sql
-```
-
-Or via phpMyAdmin:
-
-1. Open phpMyAdmin and click **Import**
-2. Select `expenditure.sql`
-3. Click **Go**
-
-This creates the `expenditure` database along with all four tables and sample seed data.
-
----
-
-### Step 3 — Configure environment variables
-
-Copy the example file and fill in your database credentials:
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-
-```ini
-DB_HOST=localhost
-DB_USER=your_mysql_username
-DB_PASS=your_mysql_password
-DB_NAME=expenditure
-```
-
-For additional security, set a custom JWT secret:
-
-```ini
-SESSION_SECRET=your_long_random_secret_here
-```
-
-> If `SESSION_SECRET` is not set, the app falls back to a built-in default key. **Always set this in production.**
-
----
-
-### Step 4 — Web server configuration
-
-**Apache** — Place the project folder inside your document root (e.g. `/var/www/html/`) and ensure `AllowOverride All` is set so `.htaccess` rules work.
-
-```apache
-<Directory /var/www/html/Expenditure>
-    AllowOverride All
-</Directory>
-```
-
-**Nginx** — Add a server block pointing to the project root and pass PHP requests to PHP-FPM:
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    root /var/www/html/Expenditure;
-    index index.php;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        include fastcgi_params;
-        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
-```
-
----
-
-### Step 5 — Set file permissions
-
-```bash
-chmod -R 755 /var/www/html/Expenditure
-chown -R www-data:www-data /var/www/html/Expenditure
-```
-
----
-
-### Step 6 — Open in your browser
-
-Navigate to:
-
-```
-http://localhost/Expenditure/
-```
-
-You should see the landing page. Click **Sign In** to log in or **Sign Up** to create a new account.
-
----
+### 6. Test the Application
+* Open your web browser.
+* Navigate to `http://localhost/Expenditure/`.
+* The application should load. You can try logging in with demo credentials or creating a new account[cite: 737].
 
 ## Configuration
 
