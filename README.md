@@ -241,7 +241,7 @@ Here are the step-by-step instructions for installing and setting up the Expendi
 ### 6. Test the Application
 * Open your web browser.
 * Navigate to `http://localhost/Expenditure/`.
-* The application should load. You can try logging in with demo credentials or creating a new account[cite: 737].
+* The application should load. You can try logging in with demo credentials or creating a new account.
 
 ## Configuration
 
